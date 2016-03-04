@@ -10,9 +10,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
 
+import pl.jfonferko.currencyexchange.service.CurrencyExchangeService;
 import pl.jfonferko.currencyexchange.service.CurrencyExchangeServiceImpl;
 
-public class CurrencyExchange {
+public class CurrencyExchange implements
+CurrencyExchangeService{
 
 	private String name = null;
 
@@ -60,5 +62,41 @@ public class CurrencyExchange {
 			CurrencyNotFoundException {
 		return currencyExchangeService
 				.findCurrencyByCodeFromLastCurrencyRateStock(code);
+	}
+
+	@Override
+	public ExchangeListing getLastCurrencyRateStock()
+			throws MalformedURLException, IOException,
+			ParserConfigurationException, SAXException, DOMException,
+			ParseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ExchangeListing getLastAverageCurrencyRateStock()
+			throws MalformedURLException, IOException,
+			ParserConfigurationException, SAXException, DOMException,
+			ParseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ExchangeListing getLastInconvertibleCurrencyRateStock()
+			throws MalformedURLException, IOException,
+			ParserConfigurationException, SAXException, DOMException,
+			ParseException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
+			throws MalformedURLException, DOMException, IOException,
+			ParserConfigurationException, SAXException, ParseException,
+			CurrencyNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

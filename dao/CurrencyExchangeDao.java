@@ -33,18 +33,19 @@ public interface CurrencyExchangeDao {
 	/**
 	 * This class gets XML file from URL
 	 * 
-	 * @param Sting ratingType
-	 *            type of stock tables, possible params: A - table of average
-	 *            currency last rate, B - table of average inconvertible last
-	 *            currency rate, C - table of buy/seel last currency rate, H -
-	 *            table of unit of account last rate
+	 * @param Sting
+	 *            ratingType type of stock tables, possible params: A - table of
+	 *            average currency last rate, B - table of average inconvertible
+	 *            last currency rate, C - table of buy/seel last currency rate,
+	 *            H - table of unit of account last rate
 	 * 
 	 * @return Object of Document class ready to XML parse
 	 */
 
-	Document getLastCurrencyRate(String ratingType)
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException;
+	Document getData(String ratingType) throws MalformedURLException,
+			IOException, ParserConfigurationException, SAXException,
+			DOMException, ParseException;
 
+	
+	
 }

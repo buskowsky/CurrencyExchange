@@ -50,7 +50,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		ExchangeListing el = new ExchangeListing();
 		el.setStockType('C');
 		List<Currency> cList = new LinkedList<Currency>();
-		Document doc = currencyExchangeDao.getLastCurrencyRate("C");
+		Document doc = currencyExchangeDao.getData("C");
 
 		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
 		for (int tmp = 0; tmp < nodeL.getLength(); tmp++) {
@@ -109,7 +109,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		ExchangeListing el = new ExchangeListing();
 		el.setStockType('A');
 		List<Currency> cList = new LinkedList<Currency>();
-		Document doc = currencyExchangeDao.getLastCurrencyRate("A");
+		Document doc = currencyExchangeDao.getData("A");
 
 		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
 		for (int tmp = 0; tmp < nodeL.getLength(); tmp++) {
@@ -163,7 +163,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 		ExchangeListing el = new ExchangeListing();
 		el.setStockType('B');
-		Document doc = currencyExchangeDao.getLastCurrencyRate("B");
+		Document doc = currencyExchangeDao.getData("B");
 		List<Currency> cList = new LinkedList<Currency>();
 
 		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
@@ -216,7 +216,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 		ExchangeListing el = new ExchangeListing();
 		el.setStockType('H');
-		Document doc = currencyExchangeDao.getLastCurrencyRate("H");
+		Document doc = currencyExchangeDao.getData("H");
 		List<Currency> cList = new LinkedList<Currency>();
 
 		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");

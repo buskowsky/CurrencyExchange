@@ -23,9 +23,9 @@ public class CurrencyExchangeDaoImpl implements CurrencyExchangeDao {
 	}
 
 	@Override
-	public Document getLastCurrencyRate(String ratingType) throws IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
+	public Document getData(String ratingType) throws IOException,
+			ParserConfigurationException, DOMException, ParseException,
+			SAXException {
 
 		URL url = null;
 
@@ -52,4 +52,5 @@ public class CurrencyExchangeDaoImpl implements CurrencyExchangeDao {
 
 		return doc;
 	}
+
 }

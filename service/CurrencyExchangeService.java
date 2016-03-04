@@ -15,8 +15,8 @@ import pl.jfonferko.currencyexchange.classes.ExchangeListing;
 
 /**
  * 
- * This interface is used to get new ExchangeLsiting class object or try to find
- * currency by code
+ * This interface is used to get new object of ExchangeListing class or try to
+ * find currency by code
  * 
  * @author Jakub Fonferko
  * @since 25-Feb-2016
@@ -25,8 +25,7 @@ import pl.jfonferko.currencyexchange.classes.ExchangeListing;
 public interface CurrencyExchangeService {
 
 	/**
-	 * This class methods - getLastCurrencyRateStock(),
-	 * getLastAverageCurrencyRateStock(),
+	 * methods - getLastCurrencyRateStock(), getLastAverageCurrencyRateStock(),
 	 * getLastInconvertibleCurrencyRateStock(), getLastUnitOfAccountRate() gets
 	 * Document DOM from CurrencyExchangeDao and parse this Document to
 	 * ExchangeListing class
@@ -42,7 +41,7 @@ public interface CurrencyExchangeService {
 	 *         code
 	 * 
 	 * @param String
-	 *            code - code of currency what we are looking for,
+	 *            code - code of currency we are looking for,
 	 * 
 	 * @return if currency with code exist return Currency object otherwise
 	 *         throw CurrencyNotFoundException()

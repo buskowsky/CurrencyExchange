@@ -1,4 +1,4 @@
-package pl.jfonferko.currencyexchange.classes;
+package pl.jfonferko.currencyexchange;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -8,6 +8,11 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.DOMException;
 import org.xml.sax.SAXException;
+
+import pl.jfonferko.currencyexchange.classes.Currency;
+import pl.jfonferko.currencyexchange.classes.CurrencyExchange;
+import pl.jfonferko.currencyexchange.classes.CurrencyNotFoundException;
+import pl.jfonferko.currencyexchange.classes.ExchangeListing;
 
 public class Main {
 	public static void main(String[] args) throws MalformedURLException,

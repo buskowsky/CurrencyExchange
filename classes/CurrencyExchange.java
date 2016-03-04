@@ -14,20 +14,10 @@ import pl.jfonferko.currencyexchange.service.CurrencyExchangeServiceImpl;
 
 public class CurrencyExchange implements CurrencyExchangeService {
 
-	private String name = null;
-
 	private CurrencyExchangeServiceImpl currencyExchangeService;
 
 	public CurrencyExchange() {
 		currencyExchangeService = new CurrencyExchangeServiceImpl();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public ExchangeListing getLastCurrencyRateStock()

@@ -2,7 +2,6 @@ package pl.jfonferko.currencyexchange.service;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.MalformedURLException;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.LinkedList;
@@ -26,274 +25,201 @@ import pl.jfonferko.currencyexchange.dao.CurrencyExchangeDaoImpl;
 @Service
 public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
+	private CurrencyExchangeDaoImpl currencyExchangeDao;
+	private Document doc;
+	private ExchangeListing exchangeListing;
+
 	public CurrencyExchangeServiceImpl() {
 		currencyExchangeDao = new CurrencyExchangeDaoImpl();
 	}
 
-	private CurrencyExchangeDaoImpl currencyExchangeDao;
+	@Override
+	public ExchangeListing getLastBuyAndSellPricesOfForeignCurrencies() {
+		exchangeListing = new ExchangeListing();
+		exchangeListing.setStockType("C");
 
-	public CurrencyExchangeDaoImpl getCurrencyExchangeDao() {
-		return currencyExchangeDao;
-	}
-
-	public void setCurrencyExchangeDao(
-			CurrencyExchangeDaoImpl currencyExchangeDao) {
-		this.currencyExchangeDao = currencyExchangeDao;
+		prepareDocument(exchangeListing.getStockType());
+		readHead();
+		readBody();
+		return exchangeListing;
 	}
 
 	@Override
-	public ExchangeListing getLastCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
+	public ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies() {
 
-		ExchangeListing el = new ExchangeListing();
-		el.setStockType('C');
-		List<Currency> cList = new LinkedList<Currency>();
-		Document doc = currencyExchangeDao.getData("C");
+		exchangeListing = new ExchangeListing();
+		exchangeListing.setStockType("A");
 
-		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
-		for (int tmp = 0; tmp < nodeL.getLength(); tmp++) {
-			Node n = nodeL.item(tmp);
-			Element d = (Element) n;
-			el.setStockDate(d.getElementsByTagName("data_notowania").item(0)
-					.getTextContent());
-			el.setPublicationDate(d.getElementsByTagName("data_publikacji")
-					.item(0).getTextContent());
-			el.setTableNumber(d.getElementsByTagName("numer_tabeli").item(0)
-					.getTextContent());
-		}
-
-		NodeList nodeList = doc.getElementsByTagName("pozycja");
-
-		for (int temp = 0; temp < nodeList.getLength(); temp++) {
-			Node nNode = nodeList.item(temp);
-			Currency c = new Currency();
-
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element element = (Element) nNode;
-
-				c.setName(element.getElementsByTagName("nazwa_waluty").item(0)
-						.getTextContent());
-				c.setCode(element.getElementsByTagName("kod_waluty").item(0)
-						.getTextContent());
-				c.setConverter(element.getElementsByTagName("przelicznik")
-						.item(0).getTextContent());
-
-				DecimalFormat df = new DecimalFormat();
-				df.setParseBigDecimal(true);
-				Number n = df.parse(element.getElementsByTagName("kurs_kupna")
-						.item(0).getTextContent());
-
-				c.setBuyingRate((BigDecimal) n);
-
-				n = df.parse(element.getElementsByTagName("kurs_sprzedazy")
-						.item(0).getTextContent());
-				c.setSeelingRate((BigDecimal) n);
-				cList.add(c);
-			}
-
-		}
-		el.setExchangeList(cList);
-
-		return el;
+		prepareDocument(exchangeListing.getStockType());
+		readHead();
+		readBody();
+		return exchangeListing;
 
 	}
 
 	@Override
-	public ExchangeListing getLastAverageCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
+	public ExchangeListing getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies() {
+		exchangeListing = new ExchangeListing();
+		exchangeListing.setStockType("B");
 
-		ExchangeListing el = new ExchangeListing();
-		el.setStockType('A');
-		List<Currency> cList = new LinkedList<Currency>();
-		Document doc = currencyExchangeDao.getData("A");
-
-		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
-		for (int tmp = 0; tmp < nodeL.getLength(); tmp++) {
-			Node n = nodeL.item(tmp);
-			Element d = (Element) n;
-
-			el.setPublicationDate(d.getElementsByTagName("data_publikacji")
-					.item(0).getTextContent());
-			el.setTableNumber(d.getElementsByTagName("numer_tabeli").item(0)
-					.getTextContent());
-		}
-
-		NodeList nodeList = doc.getElementsByTagName("pozycja");
-
-		for (int temp = 0; temp < nodeList.getLength(); temp++) {
-			Node nNode = nodeList.item(temp);
-			Currency c = new Currency();
-
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element element = (Element) nNode;
-
-				c.setName(element.getElementsByTagName("nazwa_waluty").item(0)
-						.getTextContent());
-				c.setCode(element.getElementsByTagName("kod_waluty").item(0)
-						.getTextContent());
-				c.setConverter(element.getElementsByTagName("przelicznik")
-						.item(0).getTextContent());
-
-				DecimalFormat df = new DecimalFormat();
-				df.setParseBigDecimal(true);
-				Number n = df.parse(element.getElementsByTagName("kurs_sredni")
-						.item(0).getTextContent());
-
-				c.setAverageRate((BigDecimal) n);
-
-				cList.add(c);
-			}
-
-		}
-		el.setExchangeList(cList);
-
-		return el;
-
+		prepareDocument(exchangeListing.getStockType());
+		readHead();
+		readBody();
+		return exchangeListing;
 	}
 
 	@Override
-	public ExchangeListing getLastInconvertibleCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
+	public ExchangeListing getLastUnitOfAccountRates() {
+		exchangeListing = new ExchangeListing();
+		exchangeListing.setStockType("H");
 
-		ExchangeListing el = new ExchangeListing();
-		el.setStockType('B');
-		Document doc = currencyExchangeDao.getData("B");
-		List<Currency> cList = new LinkedList<Currency>();
-
-		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
-
-		for (int temp = 0; temp < nodeL.getLength(); temp++) {
-
-			Node n = nodeL.item(temp);
-			Element e = (Element) n;
-
-			el.setPublicationDate(e.getElementsByTagName("data_publikacji")
-					.item(0).getTextContent());
-			el.setTableNumber(e.getElementsByTagName("numer_tabeli").item(0)
-					.getTextContent());
-		}
-
-		NodeList nodeList = doc.getElementsByTagName("pozycja");
-		for (int temp = 0; temp < nodeList.getLength(); temp++) {
-			Node nNode = nodeList.item(temp);
-			Currency c = new Currency();
-
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element element = (Element) nNode;
-
-				c.setName(element.getElementsByTagName("nazwa_waluty").item(0)
-						.getTextContent());
-				c.setCode(element.getElementsByTagName("kod_waluty").item(0)
-						.getTextContent());
-				c.setConverter(element.getElementsByTagName("przelicznik")
-						.item(0).getTextContent());
-
-				DecimalFormat df = new DecimalFormat();
-				df.setParseBigDecimal(true);
-				Number n = df.parse(element.getElementsByTagName("kurs_sredni")
-						.item(0).getTextContent());
-
-				c.setAverageRate((BigDecimal) n);
-
-				cList.add(c);
-			}
-		}
-		el.setExchangeList(cList);
-		return el;
+		prepareDocument(exchangeListing.getStockType());
+		readHead();
+		readBody();
+		return exchangeListing;
 	}
 
-	@Override
-	public ExchangeListing getLastUnitOfAccountRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
+	public Currency findCurrencyByCode(String code)
+			throws CurrencyNotFoundException {
 
-		ExchangeListing el = new ExchangeListing();
-		el.setStockType('H');
-		Document doc = currencyExchangeDao.getData("H");
-		List<Currency> cList = new LinkedList<Currency>();
-
-		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
-
-		for (int temp = 0; temp < nodeL.getLength(); temp++) {
-
-			Node n = nodeL.item(temp);
-			Element e = (Element) n;
-
-			el.setPublicationDate(e.getElementsByTagName("data_publikacji")
-					.item(0).getTextContent());
-			el.setTableNumber(e.getElementsByTagName("numer_tabeli").item(0)
-					.getTextContent());
-			el.setStockDate(e.getElementsByTagName("data_notowania").item(temp)
-					.getTextContent());
-
-		}
-
-		NodeList nodeList = doc.getElementsByTagName("pozycja");
-		for (int temp = 0; temp < nodeList.getLength(); temp++) {
-			Node nNode = nodeList.item(temp);
-			Currency c = new Currency();
-
-			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
-				Element element = (Element) nNode;
-
-				c.setCountry(element.getElementsByTagName("nazwa_kraju")
-						.item(0).getTextContent());
-				c.setCode(element.getElementsByTagName("symbol_waluty").item(0)
-						.getTextContent());
-
-				c.setName(element.getElementsByTagName("nazwa_waluty").item(0)
-						.getTextContent());
-
-				c.setConverter(element.getElementsByTagName("przelicznik")
-						.item(0).getTextContent());
-
-				DecimalFormat df = new DecimalFormat();
-				df.setParseBigDecimal(true);
-				Number n = df.parse(element.getElementsByTagName("kurs_sredni")
-						.item(0).getTextContent());
-
-				c.setAverageRate((BigDecimal) n);
-
-				Number n1 = df.parse(element.getElementsByTagName("kurs_kupna")
-						.item(0).getTextContent());
-				c.setBuyingRate((BigDecimal) n1);
-
-				Number n2 = df.parse(element
-						.getElementsByTagName("kurs_sprzedazy").item(0)
-						.getTextContent());
-				c.setSeelingRate((BigDecimal) n2);
-
-				cList.add(c);
-			}
-		}
-		el.setExchangeList(cList);
-		return el;
-	}
-
-	public Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException,
-			CurrencyNotFoundException {
-
-		ExchangeListing el = new ExchangeListing();
-		el = getLastCurrencyRateStock();
+		exchangeListing = new ExchangeListing();
+		exchangeListing.setStockType("A");
+		prepareDocument(exchangeListing.getStockType());
+		readBody();
 
 		Currency tmp = new Currency();
 		tmp.setCode(code);
 
-		if (el.getCurrencyList().contains(tmp)) {
-			for (Currency c : el.getCurrencyList()) {
+		if (exchangeListing.getCurrencyList().contains(tmp)) {
+			for (Currency c : exchangeListing.getCurrencyList()) {
 				if (c.equals(tmp))
 					return c;
 			}
+		} else {
+			exchangeListing.setStockType("B");
+			prepareDocument(exchangeListing.getStockType());
+			readBody();
+			if (exchangeListing.getCurrencyList().contains(tmp)) {
+				for (Currency c : exchangeListing.getCurrencyList()) {
+					if (c.equals(tmp))
+						return c;
+				}
+			}
 		}
 		throw new CurrencyNotFoundException();
+	}
+
+	private void prepareDocument(String stockType) {
+		try {
+			doc = currencyExchangeDao.getData(stockType);
+		} catch (DOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void readHead() {
+		NodeList nodeL = doc.getElementsByTagName("tabela_kursow");
+		Node n = nodeL.item(0);
+		Element d = (Element) n;
+		try {
+			exchangeListing.setStockDate(d
+					.getElementsByTagName("data_notowania").item(0)
+					.getTextContent());
+		} catch (NullPointerException npe) {
+			exchangeListing.setStockDate(null);
+		}
+		exchangeListing.setPublicationDate(d
+				.getElementsByTagName("data_publikacji").item(0)
+				.getTextContent());
+		exchangeListing.setTableNumber(d.getElementsByTagName("numer_tabeli")
+				.item(0).getTextContent());
+
+	}
+
+	private void readBody() {
+		NodeList nodeList = doc.getElementsByTagName("pozycja");
+		List<Currency> cList = new LinkedList<Currency>();
+		for (int temp = 0; temp < nodeList.getLength(); temp++) {
+			Node nNode = nodeList.item(temp);
+			Currency c = new Currency();
+
+			if (nNode.getNodeType() == Node.ELEMENT_NODE) {
+				Element element = (Element) nNode;
+
+				c.setName(element.getElementsByTagName("nazwa_waluty").item(0)
+						.getTextContent());
+				try {
+					c.setCountry(element.getElementsByTagName("nazwa_kraju ")
+							.item(0).getTextContent());
+				} catch (NullPointerException npe) {
+					c.setCountry(null);
+				}
+				try {
+					c.setSymbol(element.getElementsByTagName("symbol_waluty")
+							.item(0).getTextContent());
+				} catch (NullPointerException npe) {
+					c.setSymbol(null);
+				}
+
+				try {
+					c.setCode(element.getElementsByTagName("kod_waluty")
+							.item(0).getTextContent());
+				} catch (NullPointerException npe) {
+					c.setCode(null);
+				}
+
+				c.setConverter(element.getElementsByTagName("przelicznik")
+						.item(0).getTextContent());
+
+				DecimalFormat df = new DecimalFormat();
+				df.setParseBigDecimal(true);
+				Number n;
+				try {
+					n = df.parse(element.getElementsByTagName("kurs_kupna")
+							.item(0).getTextContent());
+
+					c.setBuyingRate((BigDecimal) n);
+				} catch (NullPointerException npe) {
+					c.setBuyingRate(null);
+				} catch (DOMException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				try {
+					n = df.parse(element.getElementsByTagName("kurs_sprzedazy")
+							.item(0).getTextContent());
+					c.setSeelingRate((BigDecimal) n);
+				} catch (NullPointerException npe) {
+					c.setSeelingRate(null);
+				} catch (DOMException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				try {
+					n = df.parse(element.getElementsByTagName("kurs_sredni")
+							.item(0).getTextContent());
+					c.setAverageRate((BigDecimal) n);
+				} catch (NullPointerException npe) {
+					c.setAverageRate(null);
+				} catch (DOMException e) {
+					e.printStackTrace();
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				cList.add(c);
+			}
+		}
+		exchangeListing.setCurrencyList(cList);
+
 	}
 }

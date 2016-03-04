@@ -1,14 +1,5 @@
 package pl.jfonferko.currencyexchange.classes;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.text.ParseException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
-
 import pl.jfonferko.currencyexchange.service.CurrencyExchangeService;
 import pl.jfonferko.currencyexchange.service.CurrencyExchangeServiceImpl;
 
@@ -20,36 +11,28 @@ public class CurrencyExchange implements CurrencyExchangeService {
 		currencyExchangeService = new CurrencyExchangeServiceImpl();
 	}
 
-	public ExchangeListing getLastCurrencyRateStock()
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException {
-		return currencyExchangeService.getLastCurrencyRateStock();
-	}
-
-	public ExchangeListing getLastAverageCurrencyRateStock()
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException {
-		return currencyExchangeService.getLastAverageCurrencyRateStock();
-	}
-
-	public ExchangeListing getLastInconvertibleCurrencyRateStock()
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException {
-		return currencyExchangeService.getLastInconvertibleCurrencyRateStock();
-	}
-
-	public ExchangeListing getLastUnitOfAccountRateStock()
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException {
-		return currencyExchangeService.getLastUnitOfAccountRateStock();
-	}
-
-	public Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException,
-			CurrencyNotFoundException {
+	public ExchangeListing getLastBuyAndSellPricesOfForeignCurrencies() {
 		return currencyExchangeService
-				.findCurrencyByCodeFromLastCurrencyRateStock(code);
+				.getLastBuyAndSellPricesOfForeignCurrencies();
+	}
+
+	public ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies() {
+		return currencyExchangeService
+				.getLastMiddleExchangeRatesOfForeignCurrencies();
+	}
+
+	public ExchangeListing getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies() {
+		return currencyExchangeService
+				.getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies();
+	}
+
+	public ExchangeListing getLastUnitOfAccountRates() {
+		return currencyExchangeService.getLastUnitOfAccountRates();
+	}
+
+	public Currency findCurrencyByCode(String code)
+			throws CurrencyNotFoundException {
+		return currencyExchangeService.findCurrencyByCode(code);
 	}
 
 }

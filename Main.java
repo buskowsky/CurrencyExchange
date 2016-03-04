@@ -22,24 +22,19 @@ public class Main {
 		CurrencyExchange ce = new CurrencyExchange();
 
 		ExchangeListing listing = new ExchangeListing();
-		listing = ce.getLastCurrencyRateStock();
 
-		System.out.println(listing.toString());
-		for (Currency c : listing.getCurrencyList()) {
-			System.out.println(c.toString());
-
-		}
-		System.out.println("-------------");
-
-		listing = ce.getLastAverageCurrencyRateStock();
-		System.out.println(listing.toString());
+		listing = ce.getLastBuyAndSellPricesOfForeignCurrencies();
+		System.out.println(listing.getStockType());
+		System.out.println(listing.getPublicationDate());
+		System.out.println(listing.getStockDate());
+		System.out.println(listing.getTableNumber());
 		for (Currency c : listing.getCurrencyList()) {
 			System.out.println(c.toString());
 		}
 
 		Currency c = new Currency();
 		try {
-			c = ce.findCurrencyByCodeFromLastCurrencyRateStock("UD");
+			c = ce.findCurrencyByCode("UD");
 		} catch (CurrencyNotFoundException e) {
 			c.setName("not found");
 			c.setCode("-----");

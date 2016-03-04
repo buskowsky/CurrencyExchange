@@ -7,7 +7,7 @@ public class ExchangeListing {
 	private String publicationDate = null;
 	private String stockDate = null;
 	private String tableNumber = null;
-	private char stockType = '-';
+	private String stockType = null;
 
 	private List<Currency> currencyList = new LinkedList<Currency>();
 
@@ -35,11 +35,11 @@ public class ExchangeListing {
 		this.tableNumber = tableNumber;
 	}
 
-	public char getStockType() {
+	public String getStockType() {
 		return stockType;
 	}
 
-	public void setStockType(char stockType) {
+	public void setStockType(String stockType) {
 		this.stockType = stockType;
 	}
 
@@ -47,7 +47,7 @@ public class ExchangeListing {
 		return currencyList;
 	}
 
-	public void setExchangeList(List<Currency> currencyList) {
+	public void setCurrencyList(List<Currency> currencyList) {
 		this.currencyList = currencyList;
 	}
 

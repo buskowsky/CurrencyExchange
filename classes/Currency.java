@@ -7,6 +7,7 @@ public class Currency {
 	private String converter;
 	private String code;
 	private String country;
+	private String symbol;
 	private BigDecimal buyingRate;
 	private BigDecimal seelingRate;
 	private BigDecimal averageRate;
@@ -75,6 +76,14 @@ public class Currency {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	public String getSymbol() {
+		return symbol;
+	}
+
+	public void setSymbol(String symbol) {
+		this.symbol = symbol;
 	}
 
 	@Override

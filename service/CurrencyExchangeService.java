@@ -1,13 +1,6 @@
 package pl.jfonferko.currencyexchange.service;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
-import java.text.ParseException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.DOMException;
-import org.xml.sax.SAXException;
 
 import pl.jfonferko.currencyexchange.classes.Currency;
 import pl.jfonferko.currencyexchange.classes.CurrencyNotFoundException;
@@ -47,28 +40,14 @@ public interface CurrencyExchangeService {
 	 *         throw CurrencyNotFoundException()
 	 */
 
-	ExchangeListing getLastCurrencyRateStock() throws MalformedURLException,
-			IOException, ParserConfigurationException, SAXException,
-			DOMException, ParseException;
+	ExchangeListing getLastBuyAndSellPricesOfForeignCurrencies();
 
-	ExchangeListing getLastAverageCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException;
+	ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies();
 
-	ExchangeListing getLastInconvertibleCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException;
+	ExchangeListing getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies();
 
-	ExchangeListing getLastUnitOfAccountRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException;
+	ExchangeListing getLastUnitOfAccountRates();
 
-	Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException,
-			CurrencyNotFoundException;
+	Currency findCurrencyByCode(String code) throws CurrencyNotFoundException;
 
 }

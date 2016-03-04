@@ -17,7 +17,7 @@ public class Main {
 		CurrencyExchange ce = new CurrencyExchange();
 
 		ExchangeListing listing = new ExchangeListing();
-		listing = ce.getLastCurrencyRate();
+		listing = ce.getLastCurrencyRateStock();
 
 		System.out.println(listing.toString());
 		for (Currency c : listing.getCurrencyList()) {
@@ -26,7 +26,7 @@ public class Main {
 		}
 		System.out.println("-------------");
 
-		listing = ce.getLastAverageCurrencyRate();
+		listing = ce.getLastAverageCurrencyRateStock();
 		System.out.println(listing.toString());
 		for (Currency c : listing.getCurrencyList()) {
 			System.out.println(c.toString());
@@ -34,7 +34,7 @@ public class Main {
 
 		Currency c = new Currency();
 		try {
-			c = ce.getCurrencyByCodeFromLastExchangeListing("UD");
+			c = ce.findCurrencyByCodeFromLastCurrencyRateStock("UD");
 		} catch (CurrencyNotFoundException e) {
 			c.setName("not found");
 			c.setCode("-----");

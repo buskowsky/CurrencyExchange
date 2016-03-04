@@ -26,6 +26,10 @@ import pl.jfonferko.currencyexchange.dao.CurrencyExchangeDaoImpl;
 @Service
 public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
+	public CurrencyExchangeServiceImpl() {
+		currencyExchangeDao = new CurrencyExchangeDaoImpl();
+	}
+
 	private CurrencyExchangeDaoImpl currencyExchangeDao;
 
 	public CurrencyExchangeDaoImpl getCurrencyExchangeDao() {
@@ -35,10 +39,6 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 	public void setCurrencyExchangeDao(
 			CurrencyExchangeDaoImpl currencyExchangeDao) {
 		this.currencyExchangeDao = currencyExchangeDao;
-	}
-
-	public CurrencyExchangeServiceImpl() {
-		currencyExchangeDao = new CurrencyExchangeDaoImpl();
 	}
 
 	@Override
@@ -209,7 +209,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 	}
 
 	@Override
-	public ExchangeListing getLastUnitOfAccountRate()
+	public ExchangeListing getLastUnitOfAccountRateStock()
 			throws MalformedURLException, IOException,
 			ParserConfigurationException, SAXException, DOMException,
 			ParseException {

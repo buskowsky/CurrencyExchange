@@ -15,7 +15,8 @@ import pl.jfonferko.currencyexchange.classes.ExchangeListing;
 
 /**
  * 
- * This interface parse XML and try to find currency by code
+ * This interface is used to get new ExchangeLsiting class object or try to find
+ * currency by code
  * 
  * @author Jakub Fonferko
  * @since 25-Feb-2016
@@ -27,14 +28,14 @@ public interface CurrencyExchangeService {
 	 * This class methods - getLastCurrencyRateStock(),
 	 * getLastAverageCurrencyRateStock(),
 	 * getLastInconvertibleCurrencyRateStock(), getLastUnitOfAccountRate() gets
-	 * Document from CurrencyExchangeDao class and parse this Document to
+	 * Document DOM from CurrencyExchangeDao and parse this Document to
 	 * ExchangeListing class
 	 * 
 	 * @throws MalformedURLException
 	 *             , IOException, ParserConfigurationException, SAXException,
 	 *             DOMException, ParseException
 	 * 
-	 * @return parsed ExchangeListing object class.
+	 * @return new ExchangeListing object class.
 	 * 
 	 *         method findCurrencyByCodeFromLastCurrencyRateStock(String code)
 	 *         try to find Currency from last exchange listing using currency
@@ -61,9 +62,10 @@ public interface CurrencyExchangeService {
 			ParserConfigurationException, SAXException, DOMException,
 			ParseException;
 
-	ExchangeListing getLastUnitOfAccountRate() throws MalformedURLException,
-			IOException, ParserConfigurationException, SAXException,
-			DOMException, ParseException;
+	ExchangeListing getLastUnitOfAccountRateStock()
+			throws MalformedURLException, IOException,
+			ParserConfigurationException, SAXException, DOMException,
+			ParseException;
 
 	Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
 			throws MalformedURLException, DOMException, IOException,

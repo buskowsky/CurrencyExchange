@@ -12,7 +12,7 @@ import org.xml.sax.SAXException;
 
 /**
  * 
- * This interface gets XML file from URL
+ * This interface parse and normalize XML file from URL
  * 
  * @author Jakub Fonferko
  * @since 25-Feb-2016
@@ -31,21 +31,18 @@ public interface CurrencyExchangeDao {
 	final static String lastH = "http://www.nbp.pl/kursy/xml/LastH.xml";
 
 	/**
-	 * This class gets XML file from URL
 	 * 
-	 * @param Sting
-	 *            ratingType type of stock tables, possible params: A - table of
-	 *            average currency last rate, B - table of average inconvertible
-	 *            last currency rate, C - table of buy/seel last currency rate,
-	 *            H - table of unit of account last rate
+	 * @param String
+	 *            type of stock tables, possible params: A - table of average
+	 *            currency last rate, B - table of average inconvertible last
+	 *            currency rate, C - table of buy/seel last currency rate, H -
+	 *            table of unit of account last rate
 	 * 
-	 * @return Object of Document class ready to XML parse
+	 * @return new DOM Document object.
 	 */
 
 	Document getData(String ratingType) throws MalformedURLException,
 			IOException, ParserConfigurationException, SAXException,
 			DOMException, ParseException;
 
-	
-	
 }

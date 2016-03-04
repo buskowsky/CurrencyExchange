@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.text.ParseException;
 
-import javax.persistence.Entity;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.DOMException;
@@ -13,8 +12,7 @@ import org.xml.sax.SAXException;
 import pl.jfonferko.currencyexchange.service.CurrencyExchangeService;
 import pl.jfonferko.currencyexchange.service.CurrencyExchangeServiceImpl;
 
-public class CurrencyExchange implements
-CurrencyExchangeService{
+public class CurrencyExchange implements CurrencyExchangeService {
 
 	private String name = null;
 
@@ -32,31 +30,31 @@ CurrencyExchangeService{
 		this.name = name;
 	}
 
-	public ExchangeListing getLastCurrencyRate() throws MalformedURLException,
-			DOMException, IOException, ParserConfigurationException,
-			SAXException, ParseException {
+	public ExchangeListing getLastCurrencyRateStock()
+			throws MalformedURLException, DOMException, IOException,
+			ParserConfigurationException, SAXException, ParseException {
 		return currencyExchangeService.getLastCurrencyRateStock();
 	}
 
-	public ExchangeListing getLastAverageCurrencyRate()
+	public ExchangeListing getLastAverageCurrencyRateStock()
 			throws MalformedURLException, DOMException, IOException,
 			ParserConfigurationException, SAXException, ParseException {
 		return currencyExchangeService.getLastAverageCurrencyRateStock();
 	}
 
-	public ExchangeListing getLastInconvertibleCurrencyRate()
+	public ExchangeListing getLastInconvertibleCurrencyRateStock()
 			throws MalformedURLException, DOMException, IOException,
 			ParserConfigurationException, SAXException, ParseException {
 		return currencyExchangeService.getLastInconvertibleCurrencyRateStock();
 	}
 
-	public ExchangeListing getLastUnitOfAccountRate()
+	public ExchangeListing getLastUnitOfAccountRateStock()
 			throws MalformedURLException, DOMException, IOException,
 			ParserConfigurationException, SAXException, ParseException {
-		return currencyExchangeService.getLastUnitOfAccountRate();
+		return currencyExchangeService.getLastUnitOfAccountRateStock();
 	}
 
-	public Currency getCurrencyByCodeFromLastExchangeListing(String code)
+	public Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
 			throws MalformedURLException, DOMException, IOException,
 			ParserConfigurationException, SAXException, ParseException,
 			CurrencyNotFoundException {
@@ -64,39 +62,4 @@ CurrencyExchangeService{
 				.findCurrencyByCodeFromLastCurrencyRateStock(code);
 	}
 
-	@Override
-	public ExchangeListing getLastCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ExchangeListing getLastAverageCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ExchangeListing getLastInconvertibleCurrencyRateStock()
-			throws MalformedURLException, IOException,
-			ParserConfigurationException, SAXException, DOMException,
-			ParseException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Currency findCurrencyByCodeFromLastCurrencyRateStock(String code)
-			throws MalformedURLException, DOMException, IOException,
-			ParserConfigurationException, SAXException, ParseException,
-			CurrencyNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

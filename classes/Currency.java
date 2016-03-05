@@ -114,9 +114,11 @@ public class Currency {
 	@Override
 	public String toString() {
 		return "Currency [name=" + name + ", converter=" + converter
-				+ ", code=" + code + ", country=" + country + ", buyingRate="
-				+ buyingRate + ", seelingRate=" + seelingRate
-				+ ", averageRate=" + averageRate + "]";
+				+ ", code=" + code + ", country=" + country + ", symbol="
+				+ symbol + ", buyingRate=" + buyingRate + ", seelingRate="
+				+ seelingRate + ", averageRate=" + averageRate + "]";
 	}
+
+
 
 }

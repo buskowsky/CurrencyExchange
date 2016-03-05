@@ -88,7 +88,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		readBody();
 
 		Currency tmp = new Currency();
-		tmp.setCode(code);
+		tmp.setCode(code.toUpperCase());
 
 		if (exchangeListing.getCurrencyList().contains(tmp)) {
 			for (Currency c : exchangeListing.getCurrencyList()) {

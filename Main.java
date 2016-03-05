@@ -23,7 +23,7 @@ public class Main {
 
 		ExchangeListing listing = new ExchangeListing();
 
-		listing = ce.getLastBuyAndSellPricesOfForeignCurrencies();
+		listing = ce.getLastUnitOfAccountRates();
 		System.out.println(listing.getStockType());
 		System.out.println(listing.getPublicationDate());
 		System.out.println(listing.getStockDate());
@@ -34,7 +34,7 @@ public class Main {
 
 		Currency c = new Currency();
 		try {
-			c = ce.findCurrencyByCode("UD");
+			c = ce.findCurrencyByCode("UsD");
 		} catch (CurrencyNotFoundException e) {
 			c.setName("not found");
 			c.setCode("-----");

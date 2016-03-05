@@ -31,14 +31,11 @@ public class CurrencyExchangeDaoImpl implements CurrencyExchangeDao {
 
 		if (stockType == "A") {
 			url = new URL(lastA);
-		}
-		if (stockType == "B") {
+		} else if (stockType == "B") {
 			url = new URL(lastB);
-		}
-		if (stockType == "C") {
+		} else if (stockType == "C") {
 			url = new URL(lastC);
-		}
-		if (stockType == "H") {
+		} else if (stockType == "H") {
 			url = new URL(lastH);
 		}
 

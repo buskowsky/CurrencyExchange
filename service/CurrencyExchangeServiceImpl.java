@@ -6,6 +6,8 @@ import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
 
@@ -24,65 +26,49 @@ import pl.jfonferko.currencyexchange.dao.CurrencyExchangeDaoImpl;
 
 @Service
 public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
-
+	Logger log;
 	private CurrencyExchangeDaoImpl currencyExchangeDao;
 	private Document doc;
 	private ExchangeListing exchangeListing;
 
 	public CurrencyExchangeServiceImpl() {
 		currencyExchangeDao = new CurrencyExchangeDaoImpl();
+		exchangeListing = new ExchangeListing();
 	}
 
 	@Override
 	public ExchangeListing getLastBuyAndSellPricesOfForeignCurrencies() {
-		exchangeListing = new ExchangeListing();
 		exchangeListing.setStockType("C");
-
-		prepareDocument(exchangeListing.getStockType());
-		readHead();
-		readBody();
+		createListing();
 		return exchangeListing;
 	}
 
 	@Override
 	public ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies() {
-
-		exchangeListing = new ExchangeListing();
 		exchangeListing.setStockType("A");
+		createListing();
 
-		prepareDocument(exchangeListing.getStockType());
-		readHead();
-		readBody();
 		return exchangeListing;
 
 	}
 
 	@Override
 	public ExchangeListing getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies() {
-		exchangeListing = new ExchangeListing();
 		exchangeListing.setStockType("B");
-
-		prepareDocument(exchangeListing.getStockType());
-		readHead();
-		readBody();
+		createListing();
 		return exchangeListing;
 	}
 
 	@Override
 	public ExchangeListing getLastUnitOfAccountRates() {
-		exchangeListing = new ExchangeListing();
 		exchangeListing.setStockType("H");
 
-		prepareDocument(exchangeListing.getStockType());
-		readHead();
-		readBody();
+		createListing();
 		return exchangeListing;
 	}
 
-	public Currency findCurrencyByCode(String code)
-			throws CurrencyNotFoundException {
+	public Currency findCurrencyByCode(String code) {
 
-		exchangeListing = new ExchangeListing();
 		exchangeListing.setStockType("A");
 		prepareDocument(exchangeListing.getStockType());
 		readBody();
@@ -106,7 +92,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 				}
 			}
 		}
-		throw new CurrencyNotFoundException();
+		return null;
 	}
 
 	private void prepareDocument(String stockType) {
@@ -222,4 +208,12 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		exchangeListing.setCurrencyList(cList);
 
 	}
+
+	private void createListing() {
+		prepareDocument(exchangeListing.getStockType());
+		readBody();
+		readHead();
+
+	}
+
 }

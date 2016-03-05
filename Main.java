@@ -23,7 +23,7 @@ public class Main {
 
 		ExchangeListing listing = new ExchangeListing();
 
-		listing = ce.getLastUnitOfAccountRates();
+		listing = ce.getLastBuyAndSellPricesOfForeignCurrencies();
 		System.out.println(listing.getStockType());
 		System.out.println(listing.getPublicationDate());
 		System.out.println(listing.getStockDate());

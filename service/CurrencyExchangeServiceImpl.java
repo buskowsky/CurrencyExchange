@@ -47,7 +47,6 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 	public ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies() {
 		exchangeListing.setStockType("A");
 		createListing();
-
 		return exchangeListing;
 
 	}
@@ -62,7 +61,6 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 	@Override
 	public ExchangeListing getLastUnitOfAccountRates() {
 		exchangeListing.setStockType("H");
-
 		createListing();
 		return exchangeListing;
 	}

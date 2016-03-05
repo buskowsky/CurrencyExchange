@@ -23,22 +23,22 @@ public class CurrencyExchangeDaoImpl implements CurrencyExchangeDao {
 	}
 
 	@Override
-	public Document getData(String ratingType) throws IOException,
+	public Document getData(String stockType) throws IOException,
 			ParserConfigurationException, DOMException, ParseException,
 			SAXException {
 
 		URL url = null;
 
-		if (ratingType == "A") {
+		if (stockType == "A") {
 			url = new URL(lastA);
 		}
-		if (ratingType == "B") {
+		if (stockType == "B") {
 			url = new URL(lastB);
 		}
-		if (ratingType == "C") {
+		if (stockType == "C") {
 			url = new URL(lastC);
 		}
-		if (ratingType == "H") {
+		if (stockType == "H") {
 			url = new URL(lastH);
 		}
 

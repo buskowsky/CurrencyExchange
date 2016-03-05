@@ -33,16 +33,16 @@ public interface CurrencyExchangeDao {
 	/**
 	 * 
 	 * @param String
-	 *            type of stock tables, possible params: A - table of average
-	 *            currency last rate, B - table of average inconvertible last
-	 *            currency rate, C - table of buy/seel last currency rate, H -
-	 *            table of unit of account last rate
+	 *            stock type, possible params: A - table A, last middle exchange
+	 *            rates of foreign currencies, B - table B,last middle exchange
+	 *            rates of inconvertible foreign currencies, C - table C, last
+	 *            middle exchange rates of foreign currencies, H - table H,
+	 *            table of unit of account rates
 	 * 
 	 * @return new DOM Document object.
 	 */
 
-	Document getData(String ratingType) throws MalformedURLException,
+	Document getData(String stockType) throws MalformedURLException,
 			IOException, ParserConfigurationException, SAXException,
 			DOMException, ParseException;
-
 }

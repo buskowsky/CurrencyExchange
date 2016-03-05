@@ -40,8 +40,8 @@ public interface CurrencyExchangeService {
 
 	/**
 	 *
-	 * method findCurrencyByCode(String code) try to find Currency from tableA
-	 * and tableB
+	 * method findCurrencyByCode(String code) try to find Currency from tableC -
+	 * last buy/sell rates of foreign currencies
 	 * 
 	 * @param String
 	 *            code - code of currency we are looking for,

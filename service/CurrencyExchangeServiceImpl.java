@@ -65,7 +65,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 	public Currency findCurrencyByCode(String code) {
 
-		exchangeListing.setStockType("A");
+		exchangeListing.setStockType("C");
 		prepareDocument(exchangeListing.getStockType());
 		readBody();
 
@@ -76,16 +76,6 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 			for (Currency c : exchangeListing.getCurrencyList()) {
 				if (c.equals(tmp))
 					return c;
-			}
-		} else {
-			exchangeListing.setStockType("B");
-			prepareDocument(exchangeListing.getStockType());
-			readBody();
-			if (exchangeListing.getCurrencyList().contains(tmp)) {
-				for (Currency c : exchangeListing.getCurrencyList()) {
-					if (c.equals(tmp))
-						return c;
-				}
 			}
 		}
 		return null;

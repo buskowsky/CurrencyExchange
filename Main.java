@@ -24,10 +24,10 @@ public class Main {
 
 		Currency c = new Currency();
 
-		c = ce.findCurrencyByCode("sD");
+		c = ce.findCurrencyByCode("usD");
 
 		if (c != null) {
-			System.out.println(c.getCode() + " - " + c.getName());
+			System.out.println("Find - " + c.toString());
 		}
 	}
 }

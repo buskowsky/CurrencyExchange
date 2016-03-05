@@ -30,8 +30,7 @@ public class CurrencyExchange implements CurrencyExchangeService {
 		return currencyExchangeService.getLastUnitOfAccountRates();
 	}
 
-	public Currency findCurrencyByCode(String code)
-			throws CurrencyNotFoundException {
+	public Currency findCurrencyByCode(String code) {
 		return currencyExchangeService.findCurrencyByCode(code);
 	}
 

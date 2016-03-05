@@ -36,7 +36,7 @@ public interface CurrencyExchangeDao {
 	 *            stock type, possible params: A - table A, last middle exchange
 	 *            rates of foreign currencies, B - table B,last middle exchange
 	 *            rates of inconvertible foreign currencies, C - table C, last
-	 *            middle exchange rates of foreign currencies, H - table H,
+	 *            buy/sell rates of foreign currencies, H - table H,
 	 *            table of unit of account rates
 	 * 
 	 * @return new DOM Document object.

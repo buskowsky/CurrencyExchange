@@ -15,12 +15,16 @@ import pl.jfonferko.currencyexchange.classes.ExchangeListing;
 public interface CurrencyExchangeService {
 
 	/**
-	 * methods - getLastBuyAndSellPricesOfForeignCurrencies(),
-	 * getLastMiddleExchangeRatesOfForeignCurrencies(),
-	 * getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies(),
-	 * getLastUnitOfAccountRates() gets Document DOM from CurrencyExchangeDao
-	 * and parse this Document to ExchangeListing class
+	 * methods gets Document DOM and parse it ExchangeListing class
 	 * 
+	 * @see CurrencyExchangeDao
+	 * 
+	 *      getLastBuyAndSellPricesOfForeignCurrencies() gets TableC from nbp.pl
+	 *      getLastMiddleExchangeRatesOfForeignCurrencies() gets TableA from
+	 *      nbp.pl ,
+	 *      getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies() gets
+	 *      TableB from nbp.pl, getLastUnitOfAccountRates() gets TableH from
+	 *      nbp.pl
 	 * 
 	 * @return new ExchangeListing object class.
 	 * 

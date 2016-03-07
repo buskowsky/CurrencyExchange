@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.ParseException;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -34,14 +34,12 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		exchangeListing = new ExchangeListing();
 	}
 
-	@Override
 	public ExchangeListing getLastBuyAndSellPricesOfForeignCurrencies() {
 		exchangeListing.setStockType("C");
 		createListing();
 		return exchangeListing;
 	}
 
-	@Override
 	public ExchangeListing getLastMiddleExchangeRatesOfForeignCurrencies() {
 		exchangeListing.setStockType("A");
 		createListing();
@@ -49,14 +47,12 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 	}
 
-	@Override
 	public ExchangeListing getLastMiddleExchangeRatesOfInconvertibleForeignCurrencies() {
 		exchangeListing.setStockType("B");
 		createListing();
 		return exchangeListing;
 	}
 
-	@Override
 	public ExchangeListing getLastUnitOfAccountRates() {
 		exchangeListing.setStockType("H");
 		createListing();
@@ -93,8 +89,10 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	}
 
 	private void readHead() {
@@ -118,7 +116,7 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 	private void readBody() {
 		NodeList nodeList = doc.getElementsByTagName("pozycja");
-		List<Currency> cList = new LinkedList<Currency>();
+		Set<Currency> cList = new HashSet<Currency>();
 		for (int temp = 0; temp < nodeList.getLength(); temp++) {
 			Node nNode = nodeList.item(temp);
 			Currency c = new Currency();
@@ -197,9 +195,8 @@ public class CurrencyExchangeServiceImpl implements CurrencyExchangeService {
 
 	private void createListing() {
 		prepareDocument(exchangeListing.getStockType());
-		readBody();
 		readHead();
-
+		readBody();
 	}
 
 }

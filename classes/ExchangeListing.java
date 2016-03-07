@@ -1,7 +1,9 @@
 package pl.jfonferko.currencyexchange.classes;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 public class ExchangeListing {
 	private String publicationDate = null;
@@ -9,7 +11,7 @@ public class ExchangeListing {
 	private String tableNumber = null;
 	private String stockType = null;
 
-	private List<Currency> currencyList = new LinkedList<Currency>();
+	private Set<Currency> currencyList = new HashSet<Currency>();
 
 	public String getPublicationDate() {
 		return publicationDate;
@@ -43,11 +45,11 @@ public class ExchangeListing {
 		this.stockType = stockType;
 	}
 
-	public List<Currency> getCurrencyList() {
+	public Set<Currency> getCurrencyList() {
 		return currencyList;
 	}
 
-	public void setCurrencyList(List<Currency> currencyList) {
+	public void setCurrencyList(Set<Currency> currencyList) {
 		this.currencyList = currencyList;
 	}
 
